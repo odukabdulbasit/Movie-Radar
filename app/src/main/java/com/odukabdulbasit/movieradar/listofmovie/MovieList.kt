@@ -15,13 +15,19 @@ import com.odukabdulbasit.movieradar.databinding.MovieListItemBinding
 
 class MovieList : Fragment() {
 
+    val viewModel : ListViewModel by lazy {
+        val activity = requireNotNull(this.activity){
+            "You can only access the viewModel after onViewCreated()"
+        }
+        ViewModelProvider(this, ListViewModel.Factory(activity.application)).get(ListViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding : FragmentMovieListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_list, container, false)
 
-        val viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
 
         binding.lifecycleOwner = this
         binding.movieListProperty = viewModel

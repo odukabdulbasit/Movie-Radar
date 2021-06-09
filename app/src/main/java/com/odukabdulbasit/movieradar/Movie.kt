@@ -1,12 +1,16 @@
 package com.odukabdulbasit.movieradar
 
 import android.os.Parcelable
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
+import com.odukabdulbasit.movieradar.api.NetworkMovie
+import com.odukabdulbasit.movieradar.api.NetworkMovieContainer
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 data class MovieObjects(
     val page : Int,
-    @Json(name = "results") val movieList : List<Movie>,
+    @Json(name = "results") val movieList : List<NetworkMovie>,
     val total_results: Int,
     val total_pages: Int
 )
@@ -26,10 +30,9 @@ data class Movie(
     val vote_count: Int,
     val adult: Boolean,
     val backdrop_path: String,
-    val genre_ids: Array<Int>
-    //val genre_ids: List<Genre>,
-    //@Json(name = "genre_ids") val genres: List<Genre>,
+    val genre_ids: List<Int>
 ) : Parcelable
 
+/*
 @Parcelize
-data class Genre(val id: Int, val name: String) : Parcelable
+data class Genre(val id: Int, val name: String) : Parcelable*/

@@ -1,50 +1,54 @@
 package com.odukabdulbasit.movieradar.listofmovie
 
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.odukabdulbasit.Constants.apiKey
+import androidx.lifecycle.*
 import com.odukabdulbasit.movieradar.Movie
-import com.odukabdulbasit.movieradar.MovieObjects
-import com.odukabdulbasit.movieradar.api.MovieApi
-import com.squareup.moshi.JsonAdapter
+import com.odukabdulbasit.movieradar.database.getDatabase
+import com.odukabdulbasit.movieradar.repository.MoviesRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.IllegalArgumentException
 
 
-class ListViewModel : ViewModel() {
+class ListViewModel(app: Application) : ViewModel() {
 
-private val _movieProperty = MutableLiveData<List<Movie>>()
-    val movieProperty : LiveData<List<Movie>>
-    get() = _movieProperty
-
-    //bunu ikinci sayfaya veri gondermek icin kullancam
-    private val _gelenDeger = MutableLiveData<String>()
-    val gelenDeger : LiveData<String>
-    get() = _gelenDeger
+    private val database = getDatabase(app)
+    private val moviesRepository = MoviesRepository(database)
 
 
     init {
-        getMovieProperty()
+        if (isNetworkAvailable(app)) {
+            getMovieProperty()
+        }
     }
+
+    val movieProperty = moviesRepository.movies
 
     private fun getMovieProperty() {
 
         viewModelScope.launch {
-            try {
-                _movieProperty.value = MovieApi.retrofitService.getMovieList(apiKey).movieList
-                //_gelenDeger.value = MovieApi.retrofitService.getMovieList(apiKey)
-            }catch (e: Exception){
-                Timber.d(e, e.message)
-                Log.i("ListMovieHata", "$e.message")
+            moviesRepository.refreshMovies()
+        }
+    }
+
+    private fun isNetworkAvailable(application: Application): Boolean {
+        val connectivityManager = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
+
+
+    class Factory(val app: Application) : ViewModelProvider.Factory{
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(ListViewModel::class.java)){
+                @Suppress("UNCHECKED_CAST")
+                return ListViewModel(app) as T
             }
+            throw IllegalArgumentException("Unable to construct viewmodel")
         }
     }
 
 }
-
-
-//val movieObjects: MovieObjects? = jsonAdapter.fromJson(MovieApi.retrofitService.getMovieList(apiKey))
-// _movieProperty.value = movieObjects?.movieList?.get(1)

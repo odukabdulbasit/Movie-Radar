@@ -19,23 +19,14 @@ interface MovieApiService{
 
     @GET("/3/discover/movie")
     suspend fun getMovieList(
-        //ilk olarak api key querysini deneyecem daha sonra baska queryleri denerim
-       @Query("api_key") apiKey : String
+       @Query("api_key") apiKey : String,
+    @Query("popularity")  popularity : String
     ) : MovieObjects
 }
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
-
-/*val jsonAdapter: JsonAdapter<MovieObjects> =
-    moshi.adapter(MovieObjects::class.java)*/
-
-/*JsonAdapter<BlackjackHand> jsonAdapter = moshi.adapter(BlackjackHand.class);
-
-BlackjackHand blackjackHand = jsonAdapter.fromJson(json);
-System.out.println(blackjackHand);*/
-
 
 
 private val retrofit = Retrofit.Builder()
@@ -45,7 +36,7 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 object MovieApi {
-    val retrofitService : MovieApiService by lazy {
+    val movieService : MovieApiService by lazy {
         retrofit.create(MovieApiService::class.java)
     }
 }

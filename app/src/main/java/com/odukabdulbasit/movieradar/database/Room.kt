@@ -3,6 +3,7 @@ package com.odukabdulbasit.movieradar.database
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.odukabdulbasit.movieradar.Converters
 
 @Dao
 interface MovieDao{
@@ -11,9 +12,13 @@ interface MovieDao{
     @Query("select * from databasemovie")
     fun getMovies(): LiveData<List<DatabaseMovie>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(movies: List<DatabaseMovie>)
+
 }
 
 @Database(entities = [DatabaseMovie::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class MoviesDatabase : RoomDatabase(){
     abstract val movieDao : MovieDao
 }

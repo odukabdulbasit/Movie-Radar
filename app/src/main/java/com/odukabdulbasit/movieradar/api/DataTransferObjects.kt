@@ -1,5 +1,7 @@
 package com.odukabdulbasit.movieradar.api
 
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.odukabdulbasit.movieradar.Movie
 import com.odukabdulbasit.movieradar.database.DatabaseMovie
 import com.squareup.moshi.JsonClass
@@ -8,7 +10,7 @@ import com.squareup.moshi.JsonClass
 data class NetworkMovieContainer(val movies: List<NetworkMovie>)
 
 /**
- * Videos represent a devbyte that can be played.
+ * Movies represent a movies from themoviedb.
  */
 @JsonClass(generateAdapter = true)
 data class NetworkMovie(
@@ -25,7 +27,7 @@ data class NetworkMovie(
     val vote_count: Int,
     val adult: Boolean,
     val backdrop_path: String,
-    val genre_ids: Array<Int>
+    val genre_ids: List<Int>
 )
 
 /**

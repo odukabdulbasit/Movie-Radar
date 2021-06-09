@@ -2,9 +2,10 @@ package com.odukabdulbasit.movieradar.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.odukabdulbasit.movieradar.Movie
 
-@Entity
+@Entity(tableName = "databasemovie")
 data class DatabaseMovie constructor(
     @PrimaryKey
     val id: Int,
@@ -20,7 +21,7 @@ data class DatabaseMovie constructor(
     val vote_count: Int,
     val adult: Boolean,
     val backdrop_path: String,
-    val genre_ids: Array<Int>
+    @TypeConverters val genre_ids: List<Int>
 )
 
 //convert from database objects to domain objects
