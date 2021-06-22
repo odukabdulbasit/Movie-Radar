@@ -33,11 +33,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            imageUrl="@{movieProperty.backdrop_path}"
+            app:imageUrl="@{movieProperty.backdrop_path}"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_marginTop="8dp"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
