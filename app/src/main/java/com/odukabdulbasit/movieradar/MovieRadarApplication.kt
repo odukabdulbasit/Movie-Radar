@@ -36,7 +36,7 @@ class DevByteApplication : Application() {
     private fun setupRecurringWork(){
 
         val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.UNMETERED)
+            //.setRequiredNetworkType(NetworkType.UNMETERED)
             .setRequiresBatteryNotLow(true)
             .setRequiresCharging(true)
             .apply {

@@ -2,6 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/shake_to_find"
-        android:title="Shake to find" />
+        android:id="@+id/recommend_film"
+        android:title="Recommend Film" />
 </menu>

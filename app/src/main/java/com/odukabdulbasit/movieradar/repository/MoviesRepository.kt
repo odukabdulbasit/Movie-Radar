@@ -21,7 +21,10 @@ class MoviesRepository(private val database: MoviesDatabase) {
 
     suspend fun refreshMovies(){
         withContext(Dispatchers.IO){
-            val movieList = MovieApi.movieService.getMovieList(apiKey, "/discover/movie?sort_by=popularity.desc").movieList
+            //val movieList = MovieApi.movieService.getMovieList(apiKey, "/discover/movie?sort_by=popularity.desc").movieList
+            val movieList = MovieApi.movieService.getMovieList(apiKey).movieList
+
+            ///val movieList = MovieApi.movieService.getMovieList(apiKey, "primary_release_year=2010&sort_by=vote_average.desc").movieList
             database.movieDao.insertAll(NetworkMovieContainer(movieList).asDatabaseModel().toList())
         }
     }

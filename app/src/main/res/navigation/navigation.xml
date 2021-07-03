@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_movieList_to_movieDetail"
             app:destination="@id/movieDetail"/>
+        <action
+            android:id="@+id/action_movieList_to_recommendFilmFragment"
+            app:destination="@id/recommendFilmFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetail"
@@ -24,4 +27,9 @@
             android:name="SelectedMovie"
             app:argType="com.odukabdulbasit.movieradar.Movie"/>
     </fragment>
+    <fragment
+        android:id="@+id/recommendFilmFragment"
+        android:name="com.odukabdulbasit.movieradar.RecommendFilmFragment"
+        android:label="fragment_recommend_film"
+        tools:layout="@layout/fragment_recommend_film" />
 </navigation>

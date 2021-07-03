@@ -1,4 +1,4 @@
-package com.odukabdulbasit.movieradar.api
+    package com.odukabdulbasit.movieradar.api
 
 import com.odukabdulbasit.Constants.BASE_URL
 import com.odukabdulbasit.movieradar.Movie
@@ -17,10 +17,11 @@ import retrofit2.http.Query
 
 interface MovieApiService{
 
-    @GET("/3/discover/movie")
+    @GET("/3/movie/popular")
     suspend fun getMovieList(
-       @Query("api_key") apiKey : String,
-    @Query("popularity")  popularity : String
+       @Query("api_key") apiKey : String//,
+    //@Query("popularity")  popularity : String
+    //@Query("sort_by") sortBy : String
     ) : MovieObjects
 }
 

@@ -1,6 +1,7 @@
 package com.odukabdulbasit.movieradar.listofmovie
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
@@ -36,7 +37,21 @@ class MovieList : Fragment() {
         })
 
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.recommend_film -> {
+           //buraya d'yer sayfaya gitme islemi eklencek
+            findNavController().navigate(MovieListDirections.actionMovieListToRecommendFilmFragment())
+            true
+        }
+
+        else -> super.onOptionsItemSelected(item)
+    }
 }

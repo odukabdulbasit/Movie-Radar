@@ -15,12 +15,12 @@ data class DatabaseMovie constructor(
     val original_title: String,
     val overview: String,
     val popularity: Double,
-    val release_date: String,
+    val release_date: String? = "",
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int,
     val adult: Boolean,
-    val backdrop_path: String,
+    val backdrop_path: String?,
     @TypeConverters val genre_ids: List<Int>
 )
 

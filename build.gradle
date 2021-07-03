@@ -5,7 +5,7 @@ buildscript {
         moshi_verision = '1.11.0'
         retrofit_verision = '2.9.0'
         version_work = "1.0.1"
-        version_room = "2.2.5"
+        version_room = '2.3.0'
 
     }
     repositories {
