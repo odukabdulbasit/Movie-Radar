@@ -1,21 +1,19 @@
-package com.odukabdulbasit.movieradar
+package com.odukabdulbasit.movieradar.shakeandrecommend
 
 import android.content.Context
-import android.content.Context.SENSOR_SERVICE
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import com.odukabdulbasit.movieradar.R
 import com.odukabdulbasit.movieradar.databinding.FragmentRecommendFilmBinding
-
 
 class RecommendFilmFragment : Fragment(), SensorEventListener {
 
@@ -27,7 +25,8 @@ class RecommendFilmFragment : Fragment(), SensorEventListener {
     ): View? {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentRecommendFilmBinding>(
-            inflater, R.layout.fragment_recommend_film, container, false)
+            inflater, R.layout.fragment_recommend_film, container, false
+        )
 
 
         setUpSensorStuff()
@@ -69,7 +68,10 @@ class RecommendFilmFragment : Fragment(), SensorEventListener {
 
             //burada belirli ideal bir sayi belirlemesi yapmaliyim
             if (upDown.toInt() > 4 && sides.toInt() > 4){
-                Log.i("RecommentFilmFragmnet","up/down ${upDown.toInt()}\nleft/right ${sides.toInt()}")
+                Log.i(
+                    "RecommentFilmFragmnet",
+                    "up/down ${upDown.toInt()}\nleft/right ${sides.toInt()}"
+                )
             }
         }
     }
