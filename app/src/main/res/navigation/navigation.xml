@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/recommendFilmFragment"
-        android:name="com.odukabdulbasit.movieradar.RecommendFilmFragment"
+        android:name="com.odukabdulbasit.movieradar.recommendfilm.RecommendFilmFragment"
         android:label="fragment_recommend_film"
         tools:layout="@layout/fragment_recommend_film" />
 </navigation>
