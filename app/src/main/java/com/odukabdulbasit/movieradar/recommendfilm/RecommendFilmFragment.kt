@@ -1,4 +1,4 @@
-package com.odukabdulbasit.movieradar.shakeandrecommend
+package com.odukabdulbasit.movieradar.recommendfilm
 
 import android.content.Context
 import android.hardware.Sensor
@@ -12,12 +12,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.odukabdulbasit.movieradar.R
 import com.odukabdulbasit.movieradar.databinding.FragmentRecommendFilmBinding
+import com.odukabdulbasit.movieradar.listofmovie.ListViewModel
 
 class RecommendFilmFragment : Fragment(), SensorEventListener {
 
     private lateinit var sensorManager: SensorManager
+
+    val viewModel: RecommendFilmViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onViewCreated()"
+        }
+        ViewModelProvider(this, RecommendFilmViewModel.Factory(activity.application)).get(
+            RecommendFilmViewModel::class.java
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +39,9 @@ class RecommendFilmFragment : Fragment(), SensorEventListener {
             inflater, R.layout.fragment_recommend_film, container, false
         )
 
+
+        binding.lifecycleOwner = this
+        binding.recommendfilmmodel = viewModel
 
         setUpSensorStuff()
         return binding.root
@@ -61,17 +75,16 @@ class RecommendFilmFragment : Fragment(), SensorEventListener {
             val upDown = event.values[1]
 
 
-           /* // Changes the colour of the square if it's completely flat
-            val color = if (upDown.toInt() == 0 && sides.toInt() == 0) Color.GREEN else Color.RED
+            /* // Changes the colour of the square if it's completely flat
+             val color = if (upDown.toInt() == 0 && sides.toInt() == 0) Color.GREEN else Color.RED
 
-          "up/down ${upDown.toInt()}\nleft/right ${sides.toInt()}"*/
+           "up/down ${upDown.toInt()}\nleft/right ${sides.toInt()}"*/
 
             //burada belirli ideal bir sayi belirlemesi yapmaliyim
-            if (upDown.toInt() > 4 && sides.toInt() > 4){
-                Log.i(
-                    "RecommentFilmFragmnet",
-                    "up/down ${upDown.toInt()}\nleft/right ${sides.toInt()}"
-                )
+            if (upDown.toInt() > 4 && sides.toInt() > 4) {
+                Log.i("RecommentFilmFragmnet", "up/down ${upDown.toInt()}\nleft/right ${sides.toInt()}")
+
+                viewModel.setPhoneShaked()
             }
         }
     }
