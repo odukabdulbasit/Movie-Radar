@@ -3,17 +3,14 @@ package com.odukabdulbasit.movieradar.listofmovie
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
-import android.util.Log
 import androidx.lifecycle.*
-import com.odukabdulbasit.movieradar.Movie
 import com.odukabdulbasit.movieradar.database.getDatabase
 import com.odukabdulbasit.movieradar.repository.MoviesRepository
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.lang.IllegalArgumentException
 
 
-class ListViewModel(app: Application) : ViewModel() {
+class MovieListViewModel(app: Application) : ViewModel() {
 
     private val database = getDatabase(app)
     private val moviesRepository = MoviesRepository(database)
@@ -43,9 +40,9 @@ class ListViewModel(app: Application) : ViewModel() {
 
     class Factory(val app: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(ListViewModel::class.java)){
+            if (modelClass.isAssignableFrom(MovieListViewModel::class.java)){
                 @Suppress("UNCHECKED_CAST")
-                return ListViewModel(app) as T
+                return MovieListViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

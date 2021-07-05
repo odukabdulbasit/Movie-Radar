@@ -6,14 +6,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.odukabdulbasit.movieradar.listofmovie.ListViewModel
+import com.odukabdulbasit.movieradar.database.getDatabase
+import com.odukabdulbasit.movieradar.repository.MoviesRepository
 import java.lang.IllegalArgumentException
 
 class RecommendFilmViewModel(app: Application) : ViewModel() {
 
-    private var _isPhoneShaked = MutableLiveData<Boolean>()
+    private val _isPhoneShaked = MutableLiveData<Boolean>()
     val isPhoneShaked : LiveData<Boolean>
     get() = _isPhoneShaked
+
+    private val database = getDatabase(app)
+    private val moviesRepository = MoviesRepository(database)
+
+    //whole movie list
+    val movieProperty = moviesRepository.movies
 
     init {
         _isPhoneShaked.value = false
@@ -24,7 +31,7 @@ class RecommendFilmViewModel(app: Application) : ViewModel() {
     fun setPhoneShaked(){
         _isPhoneShaked.value = true
         Log.i("RecommandViewModel", "setPhoneShaked called")
-        Log.i("isPhoneShaked", "$isPhoneShaked")
+        Log.i("isPhoneShaked", "${_isPhoneShaked.value}")
     }
 
     class Factory(val app: Application) : ViewModelProvider.Factory{

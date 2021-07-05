@@ -1,24 +1,21 @@
 package com.odukabdulbasit.movieradar.listofmovie
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import com.odukabdulbasit.movieradar.R
 import com.odukabdulbasit.movieradar.databinding.FragmentMovieListBinding
-import com.odukabdulbasit.movieradar.databinding.MovieListItemBinding
 
 class MovieList : Fragment() {
 
-    val viewModel : ListViewModel by lazy {
+    val viewModel : MovieListViewModel by lazy {
         val activity = requireNotNull(this.activity){
             "You can only access the viewModel after onViewCreated()"
         }
-        ViewModelProvider(this, ListViewModel.Factory(activity.application)).get(ListViewModel::class.java)
+        ViewModelProvider(this, MovieListViewModel.Factory(activity.application)).get(MovieListViewModel::class.java)
     }
 
     override fun onCreateView(

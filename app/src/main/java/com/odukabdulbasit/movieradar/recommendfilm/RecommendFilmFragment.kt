@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.odukabdulbasit.movieradar.R
 import com.odukabdulbasit.movieradar.databinding.FragmentRecommendFilmBinding
-import com.odukabdulbasit.movieradar.listofmovie.ListViewModel
 
 class RecommendFilmFragment : Fragment(), SensorEventListener {
 
