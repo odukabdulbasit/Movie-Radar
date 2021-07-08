@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.odukabdulbasit.movieradar.Movie
 import com.odukabdulbasit.movieradar.database.getDatabase
 import com.odukabdulbasit.movieradar.repository.MoviesRepository
 import java.lang.IllegalArgumentException
@@ -16,11 +17,19 @@ class RecommendFilmViewModel(app: Application) : ViewModel() {
     val isPhoneShaked : LiveData<Boolean>
     get() = _isPhoneShaked
 
+    /*private val _randomMovie = MutableLiveData<Movie>()
+    val randomMovie : LiveData<Movie>
+    get() = _randomMovie*/
+
     private val database = getDatabase(app)
     private val moviesRepository = MoviesRepository(database)
 
     //whole movie list
-    val movieProperty = moviesRepository.movies
+       // val movieProperty = moviesRepository.movies
+    //val randomMovie = moviesRepository.movies.value?.get(3)
+
+    //bu degerin icinde tum liste var ui kisminda gidip bundan random deger alacam
+    val randomMovie = moviesRepository.getRandomMovie(rand(0, 15))
 
     init {
         _isPhoneShaked.value = false
@@ -32,7 +41,21 @@ class RecommendFilmViewModel(app: Application) : ViewModel() {
         _isPhoneShaked.value = true
         Log.i("RecommandViewModel", "setPhoneShaked called")
         Log.i("isPhoneShaked", "${_isPhoneShaked.value}")
+
+        //Called setRandomMovie
+        //setRandomMovie()
     }
+
+  /*  private fun setRandomMovie(){
+        //val randomNumber = rand(0, movieProperty.value!!.size)
+
+    }*/
+
+    private fun rand(start: Int, end: Int): Int {
+        require(start <= end) { "Illegal Argument" }
+        return (start..end).random()
+    }
+
 
     class Factory(val app: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
