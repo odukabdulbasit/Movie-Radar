@@ -10,9 +10,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.odukabdulbasit.movieradar.R
 import com.odukabdulbasit.movieradar.databinding.FragmentRecommendFilmBinding
 
@@ -41,6 +44,34 @@ class RecommendFilmFragment : Fragment(), SensorEventListener {
 
         binding.lifecycleOwner = this
         binding.recommendfilmmodel = viewModel
+
+        /*viewModel.randomMovie.observe(viewLifecycleOwner, Observer { movies ->
+            if (movies != null) {
+                Toast.makeText(
+                    this.requireContext(),
+                    "${movies.value} is get from random movie",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })*/
+
+        viewModel.isPhoneShaked.observe(viewLifecycleOwner, Observer { isShaked ->
+            if (isShaked == true){
+               /* Toast.makeText(
+                    this.requireContext(),
+                    "${viewModel.randomMovie.value?.get(4)?.title} is get from random movie",
+                    Toast.LENGTH_LONG
+                ).show()*/
+                Log.i("Random Movie Value", "${viewModel.randomMovie.value}")
+                viewModel.randomMovie.observe(viewLifecycleOwner, Observer {
+                    it.let {randomMovie ->
+                     // findNavController().navigate(RecommendFilmFragmentDirections.actionRecommendFilmFragmentToMovieDetail4(it))
+                        findNavController().navigate(RecommendFilmFragmentDirections.actionRecommendFilmFragmentToMovieDetail(it))
+                    }
+                })
+
+            }
+        })
 
         setUpSensorStuff()
         return binding.root
