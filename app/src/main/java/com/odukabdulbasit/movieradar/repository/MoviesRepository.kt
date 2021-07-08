@@ -19,6 +19,12 @@ class MoviesRepository(private val database: MoviesDatabase) {
         it.asDomainModel()
     }
 
+    //Using to get random movie from database
+    fun getRandomMovie(randomNumber: Int): LiveData<Movie>{
+       return Transformations.map(database.movieDao.getMovies()){
+            it.asDomainModel()[randomNumber]
+        }
+    }
 
     suspend fun refreshMovies(){
         withContext(Dispatchers.IO){
