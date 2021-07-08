@@ -31,5 +31,9 @@
         android:id="@+id/recommendFilmFragment"
         android:name="com.odukabdulbasit.movieradar.recommendfilm.RecommendFilmFragment"
         android:label="fragment_recommend_film"
-        tools:layout="@layout/fragment_recommend_film" />
+        tools:layout="@layout/fragment_recommend_film" >
+        <action
+            android:id="@+id/action_recommendFilmFragment_to_movieDetail"
+            app:destination="@id/movieDetail" />
+    </fragment>
 </navigation>
