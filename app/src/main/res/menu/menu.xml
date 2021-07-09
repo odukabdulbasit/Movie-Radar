@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/recommend_film"
-        android:title="Recommend Film" />
+        android:title="Recommend Film"
+        android:icon="@drawable/ic_baseline_sync_24"
+        app:showAsAction="always"/>
 </menu>
