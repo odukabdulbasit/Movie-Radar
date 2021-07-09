@@ -3,14 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@+id/imageView2" />
+        <Constraint
+            android:id="@+id/idetailImageView"
+            android:layout_width="0dp"
+            android:layout_height="425dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0.0"
+            app:layout_constraintStart_toStartOf="parent"/>
     </ConstraintSet>
 
+    <!--
     <ConstraintSet android:id="@+id/end">
         <Constraint android:id="@id/imageView2" />
-    </ConstraintSet>
+    </ConstraintSet> -->
 
     <Transition
         app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start" />
+        app:constraintSetStart="@+id/start"
+        app:duration="3000"
+        app:autoTransition="animateToEnd"/>
 </MotionScene>
