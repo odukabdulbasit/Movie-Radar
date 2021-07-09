@@ -17,16 +17,10 @@ class RecommendFilmViewModel(app: Application) : ViewModel() {
     val isPhoneShaked : LiveData<Boolean>
     get() = _isPhoneShaked
 
-    /*private val _randomMovie = MutableLiveData<Movie>()
-    val randomMovie : LiveData<Movie>
-    get() = _randomMovie*/
 
     private val database = getDatabase(app)
     private val moviesRepository = MoviesRepository(database)
 
-    //whole movie list
-       // val movieProperty = moviesRepository.movies
-    //val randomMovie = moviesRepository.movies.value?.get(3)
 
     //bu degerin icinde tum liste var ui kisminda gidip bundan random deger alacam
     val randomMovie = moviesRepository.getRandomMovie(rand(0, 15))
@@ -42,14 +36,11 @@ class RecommendFilmViewModel(app: Application) : ViewModel() {
         Log.i("RecommandViewModel", "setPhoneShaked called")
         Log.i("isPhoneShaked", "${_isPhoneShaked.value}")
 
-        //Called setRandomMovie
-        //setRandomMovie()
     }
 
-  /*  private fun setRandomMovie(){
-        //val randomNumber = rand(0, movieProperty.value!!.size)
-
-    }*/
+    fun completePhoneShaked(){
+        _isPhoneShaked.value = false
+    }
 
     private fun rand(start: Int, end: Int): Int {
         require(start <= end) { "Illegal Argument" }

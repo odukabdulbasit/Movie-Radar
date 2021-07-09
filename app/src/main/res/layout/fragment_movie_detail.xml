@@ -12,13 +12,16 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/detail_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".detailofmovie.MovieDetail">
+        tools:context=".detailofmovie.MovieDetail"
+        app:layoutDescription="@xml/fragment_movie_detail_scene">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/idetailImageView"
             android:layout_width="0dp"
             android:layout_height="425dp"
             app:imageUrl="@{selectedMovie.poster_path}"
@@ -29,29 +32,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--android:text="@{selectedMovie.vote_count}"-->
         <TextView
             android:id="@+id/movieRateTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/large_medium_margin_size"
+            android:layout_marginBottom="@dimen/medium_small_margin_size"
             android:textStyle="bold"
-            android:textColor="#fff"
-            android:textSize="15sp"
+            android:textColor="@color/detail_movie_text_color_on_image"
+            android:textSize="@dimen/small_text_size"
             android:text="@{String.valueOf(selectedMovie.vote_average)}"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintBottom_toBottomOf="@+id/idetailImageView"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/movieNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/large_medium_margin_size"
+            android:layout_marginBottom="@dimen/medium_small_margin_size"
             android:text="@{selectedMovie.title}"
-            android:textColor="#fff"
-            android:textSize="20sp"
+            android:textColor="@color/detail_movie_text_color_on_image"
+            android:textSize="@dimen/medium_plus_text_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/movieRateTv"
             app:layout_constraintStart_toStartOf="parent" />
@@ -60,27 +62,27 @@
             android:id="@+id/movieDateTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="@dimen/medium_small_margin_size"
+            android:layout_marginBottom="@dimen/medium_small_margin_size"
             android:text="@{selectedMovie.release_date}"
-            android:textColor="#fff"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            android:textColor="@color/detail_movie_text_color_on_image"
+            android:textSize="@dimen/small_plus_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/idetailImageView"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/movieDetailTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/normal_medium_margin_size"
+            android:layout_marginTop="@dimen/large_margin_size"
+            android:layout_marginEnd="@dimen/normal_medium_margin_size"
             android:text="@{selectedMovie.overview}"
             tools:text="overview is about this movie"
-            android:textSize="18sp"
+            android:textSize="@dimen/medium_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/idetailImageView" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
     </ScrollView>
 </layout>

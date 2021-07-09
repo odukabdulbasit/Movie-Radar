@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -45,27 +44,13 @@ class RecommendFilmFragment : Fragment(), SensorEventListener {
         binding.lifecycleOwner = this
         binding.recommendfilmmodel = viewModel
 
-        /*viewModel.randomMovie.observe(viewLifecycleOwner, Observer { movies ->
-            if (movies != null) {
-                Toast.makeText(
-                    this.requireContext(),
-                    "${movies.value} is get from random movie",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        })*/
+
 
         viewModel.isPhoneShaked.observe(viewLifecycleOwner, Observer { isShaked ->
             if (isShaked == true){
-               /* Toast.makeText(
-                    this.requireContext(),
-                    "${viewModel.randomMovie.value?.get(4)?.title} is get from random movie",
-                    Toast.LENGTH_LONG
-                ).show()*/
                 Log.i("Random Movie Value", "${viewModel.randomMovie.value}")
                 viewModel.randomMovie.observe(viewLifecycleOwner, Observer {
                     it.let {randomMovie ->
-                     // findNavController().navigate(RecommendFilmFragmentDirections.actionRecommendFilmFragmentToMovieDetail4(it))
                         findNavController().navigate(RecommendFilmFragmentDirections.actionRecommendFilmFragmentToMovieDetail(it))
                     }
                 })
@@ -77,9 +62,10 @@ class RecommendFilmFragment : Fragment(), SensorEventListener {
         return binding.root
     }
 
+
+
     private fun setUpSensorStuff() {
         // Create the sensor manager
-        //sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensorManager = context?.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
         // Specify the sensor you want to listen to
@@ -114,7 +100,10 @@ class RecommendFilmFragment : Fragment(), SensorEventListener {
             if (upDown.toInt() > 4 && sides.toInt() > 4) {
                 Log.i("RecommentFilmFragmnet", "up/down ${upDown.toInt()}\nleft/right ${sides.toInt()}")
 
-                viewModel.setPhoneShaked()
+                viewModel.isPhoneShaked.observe(this.requireActivity(), Observer {
+                    if (it == false)
+                        viewModel.setPhoneShaked()
+                })
             }
         }
     }

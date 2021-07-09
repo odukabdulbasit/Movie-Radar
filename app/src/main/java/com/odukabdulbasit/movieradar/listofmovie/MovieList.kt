@@ -30,6 +30,7 @@ class MovieList : Fragment() {
 
         //burada onClick islemleri yapilacak
         binding.recyclerView.adapter = MovieListAdapter(MovieListAdapter.OnClickListener{ movie ->
+           // findNavController().navigate(MovieLis.actionMovieListToMovieDetail(movie))
             findNavController().navigate(MovieListDirections.actionMovieListToMovieDetail(movie))
         })
 
@@ -44,7 +45,7 @@ class MovieList : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.recommend_film -> {
-           //buraya d'yer sayfaya gitme islemi eklencek
+            //findNavController().navigate(MovieListDirections.actionMovieListToRecommendFilmFragment())
             findNavController().navigate(MovieListDirections.actionMovieListToRecommendFilmFragment())
             true
         }
