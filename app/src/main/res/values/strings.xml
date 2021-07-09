@@ -2,4 +2,5 @@
     <string name="app_name">Movie Radar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_shake_the_phone_to_get_film_recommendation">Please shake the phone to get film recommendation.</string>
 </resources>
