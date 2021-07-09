@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_start_value">10dp</dimen>
-    <dimen name="margin_end_value">10dp</dimen>
-    <dimen name="medium_text_size">24sp</dimen>
+    <dimen name="large_text_size">24sp</dimen>
+    <dimen name="small_text_size">15sp</dimen>
+    <dimen name="medium_plus_text_size">20sp</dimen>
+    <dimen name="small_plus_text_size">16sp</dimen>
+    <dimen name="medium_text_size">18sp</dimen>
+
+    <dimen name="xsmall_margin_size">5dp</dimen>
+    <dimen name="medium_small_margin_size">8dp</dimen>
+    <dimen name="large_small_margin_size">10dp</dimen>
+    <dimen name="xmedium_margin_size">13dp</dimen>
+    <dimen name="normal_medium_margin_size">16dp</dimen>
+    <dimen name="large_medium_margin_size">20dp</dimen>
+    <dimen name="large_margin_size">32dp</dimen>
 </resources>
