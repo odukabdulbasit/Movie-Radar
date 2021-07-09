@@ -34,6 +34,7 @@
         tools:layout="@layout/fragment_recommend_film" >
         <action
             android:id="@+id/action_recommendFilmFragment_to_movieDetail"
-            app:destination="@id/movieDetail" />
+            app:destination="@id/movieDetail"
+            app:popUpTo="@id/movieList" />
     </fragment>
 </navigation>
