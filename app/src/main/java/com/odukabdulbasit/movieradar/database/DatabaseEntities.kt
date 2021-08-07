@@ -25,7 +25,6 @@ data class DatabaseMovie constructor(
 )
 
 //convert from database objects to domain objects
-
 fun List<DatabaseMovie>.asDomainModel(): List<Movie> {
     return map {
         Movie(
