@@ -45,7 +45,6 @@ class MovieList : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.recommend_film -> {
-            
             findNavController().navigate(MovieListDirections.actionMovieListToRecommendFilmFragment())
             true
         }
